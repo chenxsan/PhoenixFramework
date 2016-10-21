@@ -17,7 +17,7 @@ $ mix phoenix.new hello_world
 
 新建任务执行完，我们能看到如下内容：
 
-```
+```bash
 Fetch and install dependencies? [Yn]
 * running mix deps.get
 * running npm install && node node_modules/brunch/bin/brunch build
@@ -40,7 +40,7 @@ Before moving on, configure your database in config/dev.exs and run:
 
 所以，正确的指令是这样的：
 
-```
+```bash
 $ cd hello_world
 $ mix ecto.create
 $ mix phoenix.server
@@ -49,7 +49,7 @@ $ mix phoenix.server
 
 在我们运行 `mix ecto.create` 时，Phoenix 默认运行在开发环境下，它会从 `hello_world/config/dev.exs` 文件中读取数据库的配置：
 
-```
+```elixir
 # Configure your database
 config :hello_world, HelloWorld.Repo,
   adapter: Ecto.Adapters.Postgres,

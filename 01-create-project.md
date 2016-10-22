@@ -11,7 +11,9 @@ $ mix phoenix.new hello_world
 
 `mix phoenix.new` 命令执行到一半时，会提示：
 
-> Fetch and install dependencies? [Yn]
+```bash
+Fetch and install dependencies? [Yn]
+```
 
 是否安装依赖呢？当然选 **Y**。如果你选择 **n**，后面运行时仍然会提示你安装依赖。
 
@@ -45,9 +47,16 @@ $ cd hello_world
 $ mix ecto.create
 $ mix phoenix.server
 ```
-`mix ecto.create` 用于创建数据库。只是这一步，很可能又会报错。
+`mix ecto.create` 命令用于创建 Phoenix 开发环境数据库。只是这一步，我们很可能会碰上数据库错误：
 
-在我们运行 `mix ecto.create` 时，Phoenix 默认运行在开发环境下，它会从 `hello_world/config/dev.exs` 文件中读取数据库的配置：
+```bash
+** (Mix) The database for HelloWorld.Repo couldn't be created, reason given: psql: FATAL: Ident authentication failed for user "postgres"
+```
+如果有，请继续往下看，否则直接进入[下一章](02-explore-phoenix.md)。
+
+## 数据库连接错误
+
+在运行 `mix ecto.create` 时，Phoenix 默认运行在开发环境下，它从 `hello_world/config/dev.exs` 文件中读取数据库配置：
 
 ```elixir
 # Configure your database
@@ -59,4 +68,30 @@ config :hello_world, HelloWorld.Repo,
   hostname: "localhost",
   pool_size: 10
 ```
-如果你的 PostgreSQL 数据库还没有一个用户叫 `postgres`，或者该用户的密码不是 `postgres`，Phoenix 一样无法连接数据库，也就无法创建数据库。如果是这样的问题，请根据实际情况修改 `dev.exs` 配置文件，或者调整 PostgreSQL 的用户名/密码。
+上面的代码中，我们可以看到一个 `username`，一个 `password`，它们的值都是 `postgres`。
+
+你可能了解过，PostgreSQL 数据库连接方式是由 [pg_hba.conf 配置文件](https://www.postgresql.org/docs/current/static/auth-pg-hba-conf.html)控制的。默认情况下，PostgreSQL 的 `postgres` 角色（role）只允许本地操作系统用户 `postgres` 连接，而一般情况下，我们的操作系统用户名都不会是 `postgres`。
+
+解决办法如下（以下限 Unix/Linux 系统）：
+
+1. 给 `postgres` 角色添加密码：
+
+    ```bash
+    $ sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
+    ```
+2. 打开 `pg_hba.conf` 文件
+3. 找到如下内容：
+
+    ```conf
+    host    all             all             127.0.0.1/32            ident
+    host    all             all             ::1/128                 ident
+    ```
+4. 把 [`ident`](https://www.postgresql.org/docs/current/static/auth-methods.html#AUTH-IDENT) 改成 [`md5`](https://www.postgresql.org/docs/current/static/auth-methods.html#AUTH-PASSWORD)，允许使用密码连接：
+
+    ```conf
+    host    all             all             127.0.0.1/32            md5
+    host    all             all             ::1/128                 md5
+    ```
+5. 重启 PostgreSQL 服务
+
+**注意**：生产环境下请不要给 `postgres` 设置密码 `postgres`，可能会有安全问题，建议新建一个角色 - 但这是后话。

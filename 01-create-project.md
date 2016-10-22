@@ -5,9 +5,9 @@
 在[第一章](00-prepare.md)里我们提到过，Mix 是 Elixir 提供的一个构建工具。这一章里，我们马上要用它来创建一个 Phoenix 项目：
 
 ```bash
-$ mix phoenix.new hello_world
+$ mix phoenix.new phoenix_moment
 ```
-这里，`mix phoenix.new` 是一个命令，`hello_world` 参数表示新项目的路径，即当前目录下的 `hello_world` 目录。如果目录已存在，命令会提示是否覆盖该目录，否则会新建 `hello_world` 目录。
+这里，`mix phoenix.new` 是一个命令，`phoenix_moment` 参数表示新项目的路径，即当前目录下的 `phoenix_moment` 目录。如果目录已存在，命令会提示是否覆盖该目录，否则会新建 `phoenix_moment` 目录。
 
 `mix phoenix.new` 命令执行到一半时，会提示：
 
@@ -26,7 +26,7 @@ Fetch and install dependencies? [Yn]
 
 We are all set! Run your Phoenix application:
 
-    $ cd hello_world
+    $ cd phoenix_moment
     $ mix phoenix.server
 
 You can also run your app inside IEx (Interactive Elixir) as:
@@ -38,33 +38,33 @@ Before moving on, configure your database in config/dev.exs and run:
     $ mix ecto.create
 ```
 
-从我个人经验来说，这个提示并不友好，因为在 `cd hello_world` 后就运行了 `mix phoenix.server`，这时是会报错的，因为数据库还没创建。虽然后面有提到 `Before moving on, configure your database in config/dev.exs and run`，但对第一次使用的人来说，很可能会忽视它。
+从我个人经验来说，这个提示并不友好，因为在 `cd phoenix_moment` 后就运行了 `mix phoenix.server`，这时是会报错的，因为数据库还没创建。虽然后面有提到 `Before moving on, configure your database in config/dev.exs and run`，但对第一次使用的人来说，很可能会忽视它。
 
 所以，正确的指令是这样的：
 
 ```bash
-$ cd hello_world
+$ cd phoenix_moment
 $ mix ecto.create
 $ mix phoenix.server
 ```
 `mix ecto.create` 命令用于创建 Phoenix 开发环境数据库。只是这一步，我们很可能会碰上数据库错误：
 
 ```bash
-** (Mix) The database for HelloWorld.Repo couldn't be created, reason given: psql: FATAL: Ident authentication failed for user "postgres"
+** (Mix) The database for PhoenixMoment.Repo couldn't be created, reason given: psql: FATAL: Ident authentication failed for user "postgres"
 ```
 如果有，请继续往下看，否则直接进入[下一章](02-explore-phoenix.md)。
 
 ## 数据库连接错误
 
-在运行 `mix ecto.create` 时，Phoenix 默认运行在开发环境下，它从 `hello_world/config/dev.exs` 文件中读取数据库配置：
+在运行 `mix ecto.create` 时，Phoenix 默认运行在开发环境下，它从 `phoenix_moment/config/dev.exs` 文件中读取数据库配置：
 
 ```elixir
 # Configure your database
-config :hello_world, HelloWorld.Repo,
+config :phoenix_moment, PhoenixMoment.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "hello_world_dev",
+  database: "phoenix_moment_dev",
   hostname: "localhost",
   pool_size: 10
 ```

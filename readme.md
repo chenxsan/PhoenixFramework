@@ -12,6 +12,7 @@
 
 1. [准备工作](00-prepare.md)
 2. [创建项目](01-create-project.md)
+3. [Phoenix 初探](02-explore-phoenix.md)
 
 ## License & Copyright
 

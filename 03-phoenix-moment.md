@@ -20,3 +20,31 @@
 5. 收藏模块
     1. 收藏 moment
     2. 取消收藏
+
+下一章，我们就开始[开发用户注册的功能](04-user-register.md)。
+
+但在项目开始前，有几个约定需要事先说明。
+
+1. 代码块
+
+    你会在后面的教程里看到大量代码块：
+
+    ```elixir
+    diff --git a/test/models/user_test.exs b/test/models/user_test.exs
+    index accc8ec..a81988a 100644
+    --- a/test/models/user_test.exs
+    +++ b/test/models/user_test.exs
+    @@ -44,4 +44,9 @@ defmodule PhoenixMoment.UserTest do
+        changeset = User.changeset(%User{}, attrs)
+        refute changeset.valid?
+    end
+    +
+    +  test "changeset with invalid username should throw errors" do
+    +    attrs = %{@valid_attrs | username: "陈三"}
+    +    assert {:username, "用户名只允许使用英文字母、数字及下划线"} in errors_on(%User{}, attrs)
+    +  end
+    end
+    ```
+    如果你用过 [Git](https://github.com/git/git)，你可能很熟悉，这是 git diff 的结果。
+    
+    如果你没用过 git，你只需要关注带有 + - 号的代码行，+ 号表示在代码块里增加该行，- 号表示从代码中删除该行。

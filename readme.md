@@ -10,10 +10,19 @@
 
 不信你也来试试。
 
+教程中使用的软件版本号如下：
+
+1. Elixir - 1.3.4
+2. PhoenixFramework - 1.2.1
+3. Ecto - 2.0.5
+
+## 目录
+
 1. [准备工作](00-prepare.md)
 2. [创建项目](01-create-project.md)
 3. [Phoenix 初探](02-explore-phoenix.md)
 4. [PhoenixMoment 项目规划](03-phoenix-moment.md)
+5. [注册用户](04-user-register.md)
 
 ## License & Copyright
 

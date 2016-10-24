@@ -1,6 +1,6 @@
 # 注册用户
 
-在开始敲代码前，我们先确认一下，PhoenixMoment 项目中，用户有哪些数据需要存储，这些数据要加上什么限制，如果超出限制，要报告什么错误：
+在开始敲代码前，我们先确认一下，PhoenixMoment 项目中，用户有哪些数据需要存储，这些数据要加上什么限制，如果超出限制，要报告什么错误。
 
 1. username（用户名）
     
@@ -29,6 +29,8 @@
     密码最短 6 位|密码最短 6 位
     密码不能明文存储在数据库中|-
 
+好了，接下来准备写代码。
+
 ## 样板命令
 
 还记得在 [Phoenix 初探](02-explore-phoenix.md)一章里，我们是如何添加的帮助页面吗？
@@ -38,7 +40,7 @@
 3. 添加视图文件 `help_view.ex`
 4. 添加模板文件 `index.html.eex`
 
-但这样的过程太麻烦，易出错，应该有更便捷的方法。
+但这样的手动添加过程太麻烦，还容易出错，应该有更便捷的方法。
 
 是的，Phoenix 提供了一系列的 mix 工具包。我们要接触的这个是 [`mix phoenix.gen.html`](https://hexdocs.pm/phoenix/Mix.Tasks.Phoenix.Gen.Html.html)。
 
@@ -48,7 +50,7 @@
 $ cd phoenix_moment
 $ mix phoenix.gen.html User users username:string:unique email:string:unique password:string
 ```
-请注意大小写及单复数。`string` 表示数据是字符串类型，`unique` 表示数据唯一，不允许重复。
+请注意大小写及单复数。`string` 表示该数据是字符串类型，`unique` 表示该数据唯一，不允许重复。
 
 执行命令后的输出如下：
 
@@ -78,7 +80,7 @@ Remember to update your repository by running migrations:
 1. 添加 `resources "/users", UserController` 到 `web/router.ex` 文件中
 2. 命令行下执行 `mix ecto.migrate`
 
-前几章里，我们在添加帮助页面时，给 `web/router.ex` 文件添加了一行代码：
+前几章里，我们在添加帮助页面时，给 `web/router.ex` 文件添加过一行代码：
 
 ```elixir
 get "/help", HelpController, :index
@@ -97,9 +99,9 @@ delete "/users/:id", UserController, :delete
 ```
 可是，谁不会厌烦呢？所以 Phoenix 提供了 `resources` 的便捷方法。
 
-再来说说 `mix ecto.migrate`。目前为止，我们还没有真正操作过数据库。可我们的用户数据必须存储在数据库中，我们难道要自己手动运行 SQL 语句来创建用户表？
+再来说说 `mix ecto.migrate`。目前为止，我们还没有真正操作过数据库。可我们的用户数据必须存储在数据库中，我们难道要自己手动运行 SQL 语句来创建用户表格？
 
-不不不，我们只要运行 `mix ecto.migrate`，一切就妥当了：
+不不不，我们只要运行 `mix ecto.migrate`，一切就都妥当了：
 
 ```bash
 $ mix ecto.migrate
@@ -129,7 +131,7 @@ Generated phoenix_moment app
 
 是不是很惊讶？我们用 `mix phoenix.gen.html` 命令生成的样板，功能已经很完善了。目前来看，我们需要的，只是在样板基础上做点修改。
 
-接下来几个章节，我们将逐个完成本章开头列出的数据限制。
+接下来几个章节，我们将逐步完成本章开头列出的数据限制。
 
 
 

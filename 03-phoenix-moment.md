@@ -1,6 +1,6 @@
 # PhoenixMoment 项目规划
 
-在前几章，我们创建了 PhoenixMoment 项目用于演示。这一章里，我们要对 PhoenixMoment 项目做一个规划。我们的目标是，在教程结束时，你基本掌握 Phoenix 开发的基础，同时完成 PhoenixMoment 项目的开发与部署。
+在前几章，我们创建了 PhoenixMoment 项目用于演示。这一章里，我们要对 PhoenixMoment 项目做一个规划。我们的目标是，在教程结束时，你基本掌握 Phoenix 开发的基础，同时完成 [PhoenixMoment 项目的开发与部署](https://github.com/chenxsan/PhoenixMoment)。
 
 简单说，PhoenixMoment 项目在我的设计里，类似轻博客，用户可以用邮箱注册，登录后则可以发布内容，还可以评论、收藏别人的内容。
 

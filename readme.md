@@ -29,6 +29,7 @@
     4. [username 限定长度值](04-user-register-04.md)
     5. [username 禁止使用 `admin` 等](04-user-register-05.md)
     6. [email 规则](04-user-register-06.md)
+    7. [password 规则](04-user-register-07.md)
 
 ## License & Copyright
 

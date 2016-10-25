@@ -24,6 +24,7 @@
 4. [PhoenixMoment 项目规划](03-phoenix-moment.md)
 5. [注册用户](04-user-register.md)
     1. [username 必填](04-user-register-01.md)
+    2. [username 已被人占用](04-user-register-02.md)
 
 ## License & Copyright
 

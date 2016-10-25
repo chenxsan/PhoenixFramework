@@ -26,6 +26,7 @@
     1. [username 必填](04-user-register-01.md)
     2. [username 已被人占用](04-user-register-02.md)
     3. [username 只允许使用英文字母、数字及下划线](04-user-register-03.md)
+    4. [username 限定长度值](04-user-register-04.md)
 
 ## License & Copyright
 

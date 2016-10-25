@@ -111,10 +111,6 @@ index a81988a..1258217 100644
 +    # 断言
 +    assert {:username, "用户名已被人占用"} in errors
 +  end
-+
-   test "username should only contains [a-zA-Z0-9_]" do
-     attrs = %{@valid_attrs | username: "陈三"}
-     changeset = User.changeset(%User{}, attrs)
 ```
 运行 `mix test test/models` 的结果是：
 
@@ -156,8 +152,6 @@ index e70470c..110b75a 100644
 @@ -18,6 +18,7 @@ defmodule PhoenixMoment.User do
      |> validate_required([:username, :email, :password], message: "请填写")
      |> unique_constraint(:username, message: "用户名已被人占用")
-     |> validate_format(:username, ~r/^[a-zA-Z0-9_]+$/, message: "用户名只允许使用英文字母、数字
-及下划线")
 +    |> update_change(:username, &String.downcase/1)
      |> unique_constraint(:email)
    end
@@ -258,8 +252,6 @@ index 110b75a..e70470c 100644
 @@ -18,7 +18,6 @@ defmodule PhoenixMoment.User do
      |> validate_required([:username, :email, :password], message: "请填写")
      |> unique_constraint(:username, message: "用户名已被人占用")
-     |> validate_format(:username, ~r/^[a-zA-Z0-9_]+$/, message: "用户名只允许使用英文字母、数字
-及下划线")
 -    |> update_change(:username, &String.downcase/1)
      |> unique_constraint(:email)
    end
@@ -278,10 +270,7 @@ index e70470c..714ad03 100644
      |> cast(params, [:username, :email, :password])
      |> validate_required([:username, :email, :password], message: "请填写")
 -    |> unique_constraint(:username, message: "用户名已被人占用")
-+    |> unique_constraint(:username, name: :users_lower_username_index, message: "用户名已被人占
-用")
-     |> validate_format(:username, ~r/^[a-zA-Z0-9_]+$/, message: "用户名只允许使用英文字母、数字
-及下划线")
++    |> unique_constraint(:username, name: :users_lower_username_index, message: "用户名已被人占用")
      |> unique_constraint(:email)
    end
 ```

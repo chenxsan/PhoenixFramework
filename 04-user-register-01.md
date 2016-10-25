@@ -1,6 +1,6 @@
 # username 必填
 
-[上一章](04-user-register.md)里，我们用 `mix phoenix.gen.html` 命令创建出完整的用户界面，并且具备增加、删除、更改、查询用户的功能。
+[上一章](04-user-register-00.md)里，我们用 `mix phoenix.gen.html` 命令创建出完整的用户界面，并且具备增加、删除、更改、查询用户的功能。
 
 这一章里，我们将实现 `username` 的第一个规则：`username` 为必填项，如果未填写，提示用户`请填写`。
 

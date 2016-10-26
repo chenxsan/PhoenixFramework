@@ -31,6 +31,7 @@
     6. [email 规则](04-user-register-06.md)
     7. [password 规则](04-user-register-07.md)
     8. [password 安全存储](04-user-register-08.md)
+    9. [优化用户注册界面](04-user-register-09.md)
 
 ## License & Copyright
 

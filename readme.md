@@ -30,6 +30,7 @@
     5. [username 禁止使用 `admin` 等](04-user-register-05.md)
     6. [email 规则](04-user-register-06.md)
     7. [password 规则](04-user-register-07.md)
+    8. [password 安全存储](04-user-register-08.md)
 
 ## License & Copyright
 

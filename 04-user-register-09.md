@@ -8,9 +8,11 @@
 
     “请填写”三个字不够突出。
 
-2. 密码输入框应显示 * 号
+2. 密码输入框
 
     ![密码输入框](img/04-password-input.png)
+
+    在密码框中输入的内容，现在是明文显示，正常应该是用 * 号代替。
 
 第 1 个问题。Phoenix 默认生成的 `form.html.eex` 模板里使用了 Bootstrap [样式](https://getbootstrap.com/css/#forms-control-validation)：
 
@@ -21,7 +23,7 @@
   <%= error_tag f, :username %>
 </div>
 ```
-但模板中生成的与 Bootstrap 的比，差了 `has-error` 这样的 CSS 状态类。我们可以加上：
+但模板中生成的与 Bootstrap 的比，差了 `has-error` 这样的 CSS 状态类。我们可以给它补上：
 
 ```eex
 diff --git a/web/templates/user/form.html.eex b/web/templates/user/form.html.eex
@@ -38,13 +40,13 @@ index 5857c33..8b50f25 100644
      <%= text_input f, :username, class: "form-control" %>
      <%= error_tag f, :username %>
 ```
-这时我们的错误提示界面就会变成：
+这样我们的错误提示界面就会变成：
 
 ![用户名不为空](img/04-username-has-error.png)
 
 一目了然。至于为什么生成的模板里不带 `has-error`，可以看 [github 上的一个 issue](https://github.com/phoenixframework/phoenix/issues/1961)。
 
-第 2 个问题就好解决了，我们看现有代码：
+第 2 个问题就容易解决了，我们来看现有代码：
 
 ```eex
 <div class="form-group">
@@ -53,6 +55,6 @@ index 5857c33..8b50f25 100644
   <%= error_tag f, :password %>
 </div>
 ```
-因为生成的模板里用了 `text_input`，它是明文显示的，改为 [`password_input`](https://hexdocs.pm/phoenix_html/Phoenix.HTML.Form.html#password_input/3) 就好。
+生成的模板里现在用了 `text_input`，它是明文显示的，改为 [`password_input`](https://hexdocs.pm/phoenix_html/Phoenix.HTML.Form.html#password_input/3)，自然就会用 * 号替换显示。
 
-这样，我们就结束了用户注册模块。接下来，我们开始开发用户的登录/退出功能。
+这样，我们就结束了用户注册模块。接下来，我们将开始开发用户的登录/退出功能。

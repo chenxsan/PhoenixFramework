@@ -285,3 +285,5 @@ Finished in 0.1 seconds
 7 tests, 0 failures
 ```
 通过。完工。
+
+下一章，我们将[检查用户名的许可字符](03-username-format.md)。

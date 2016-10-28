@@ -33,7 +33,7 @@
 
 ## 样板命令
 
-还记得在 [Phoenix 初探](02-explore-phoenix.md)一章里，我们是如何添加的帮助页面吗？
+还记得在 [Phoenix 初探](../02-explore-phoenix.md)一章里，我们是如何添加的帮助页面吗？
 
 1. 在 `web/router.ex` 文件中添加路由
 2. 添加控制器文件 `help_controller.ex`
@@ -124,7 +124,7 @@ Generated phoenix_moment app
 
 之后在浏览器中打开网址 `http://localhost:4000/users/new`：
 
-![创建用户页面截图](img/04-users-new-page.png)
+![创建用户页面截图](../img/04-users-new-page.png)
 
 请随意试用该页面。
 

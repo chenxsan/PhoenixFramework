@@ -95,6 +95,7 @@ get "/users/new", UserController, :new
 get "/users/:id", UserController, :show
 post "/users", UserController, :create
 patch "/users/:id", UserController, :update
+put "/users/:id", UserController, :update
 delete "/users/:id", UserController, :delete
 ```
 可是，谁不会厌烦呢？所以 Phoenix 提供了 `resources` 的便捷方法。

@@ -95,3 +95,5 @@ index accc8ec..a81988a 100644
 ```
 
 运行测试，通过。
+
+下一章，我们将制定规则，[限制 `username` 的长度](04-username-length.md)。

@@ -111,3 +111,4 @@ index bb05fd8..b0bb7bc 100644
 +  end
  end
 ```
+下一章，我们将[禁止用户注册 `admin`](05-username-exclude.md) 等用户名。

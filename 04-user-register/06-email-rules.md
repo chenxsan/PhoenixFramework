@@ -183,7 +183,7 @@ index f966b58..8d8f3e1 100644
 
 现在，测试是失败的。
 
-如果你忘了接下来要怎么处理，请先打开 [username 不允许重复](02-username-unique.md)一章，回顾一下。
+如果你忘了接下来要怎么处理，请先打开 [username 已被人占用](02-username-unique.md)一章，回顾一下。
 
 1. 执行 `mix ecto.gen.migration alter_email_index` 命令新建一个 migration 文件：
 

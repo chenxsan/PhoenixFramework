@@ -1,6 +1,6 @@
 # password 规则
 
-`password` 的规则与 [`email` 规则类似](04-user-register-06.md)，同样有三条：
+`password` 的规则与 [`email` 规则类似](06-email-rules.md)，同样有三条：
 
 限制|错误提示
 ---|---
@@ -75,4 +75,4 @@ index 19aa630..0796d93 100644
  ```
 再运行测试，全部通过。
 
-这样，我们就完成了 `password` 的两条验证规则，[下一章](04-user-register-08.md)，我们将探索如何安全存储密码。
+这样，我们就完成了 `password` 的两条验证规则，[下一章](08-password-storage.md)，我们将探索如何安全存储密码。

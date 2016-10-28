@@ -1,6 +1,6 @@
 # username 已被人占用
 
-如果你已经完成[上一章](04-user-register-01.md)，你可能已经猜到，这章的规则要怎么写，不过在那之前，还是让我们先写个测试：
+如果你已经完成[上一章](01-username-required.md)，你可能已经猜到，这章的规则要怎么写，不过在那之前，还是让我们先写个测试：
 
 ```elixir
 diff --git a/test/models/user_test.exs b/test/models/user_test.exs
@@ -165,7 +165,7 @@ index e70470c..110b75a 100644
 
 ## 数据库迁移
 
-在[用户注册一章](04-user-register.md)，我们用 `mix phoenix.gen.html` 生成了许多样板文件，其中有一条：
+在[用户注册一章](00-prepare.md)，我们用 `mix phoenix.gen.html` 生成了许多样板文件，其中有一条：
 
 ```bash
 * creating priv/repo/migrations/20161023114137_create_user.exs

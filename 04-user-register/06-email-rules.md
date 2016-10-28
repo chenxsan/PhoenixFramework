@@ -30,7 +30,7 @@ index 1858aa6..93109e3 100644
 +  end
  end
 ```
-因为我们前面在处理 [`username` 必填](04-user-register-01.md)时，一并处理过 `email`，所以这个测试是会通过的。
+因为我们前面在处理 [`username` 必填](01-username-required.md)时，一并处理过 `email`，所以这个测试是会通过的。
 
 ## email 格式
 
@@ -183,7 +183,7 @@ index f966b58..8d8f3e1 100644
 
 现在，测试是失败的。
 
-如果你忘了接下来要怎么处理，请先打开 [username 不允许重复](04-user-register-02.md)一章，回顾一下。
+如果你忘了接下来要怎么处理，请先打开 [username 不允许重复](02-username-unique.md)一章，回顾一下。
 
 1. 执行 `mix ecto.gen.migration alter_email_index` 命令新建一个 migration 文件：
 

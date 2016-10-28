@@ -37,7 +37,7 @@ index 90e7701..a7005fa 100644
 
 打开网址，提交空的用户名，页面上已经显示“请填写”了：
 
-![show error when user submit blank username](img/04-users-blank-username.png)
+![show error when user submit blank username](../img/04-users-blank-username.png)
 
 但这是人肉测试。
 
@@ -121,6 +121,7 @@ Finished in 0.08 seconds
 ```
 测试通过。
 
+下一章，我们将[验证用户名的唯一性](02-username-unique.md)。
 ## 为什么要写测试？
 
 可能很多人都抱有这个疑问。测试增加了我们的工作量，而它的作用又不那么明显。就实际项目开发来说，绝大多数人也是不写测试的。

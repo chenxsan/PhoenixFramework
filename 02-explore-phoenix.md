@@ -107,3 +107,5 @@ $ mix phoenix.server
 目前为止，我们还没有接触到模型（Model），凑上模型，就是我们经常见到的 [`MVC` 模式](https://en.wikipedia.org/wiki/Model–view–controller)。
 
 不过在这里，我不打算论述 MVC 的好处，毕竟只是个入门教程。你目前只需要了解，Phoenix 应用了 MVC 模式，我们以后的代码里，将会大量涉及。
+
+下一章里，我们将对 [PhoenixMoment 项目做个规则](03-phoenix-moment.md)。

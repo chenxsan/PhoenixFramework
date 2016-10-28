@@ -2,7 +2,7 @@
 
 如果你在前面章节里，曾注册过用户，则打开 [http://localhost:4000/users](http://localhost:4000/users) 网址，你会看到类似如下截图的内容：
 
-![users list](img/04-user-list.png)
+![users list](../img/04-user-list.png)
 
 密码字段一览无余，如果数据库被人入侵，则用户密码全部暴露。
 
@@ -64,7 +64,7 @@ iex(1)> 26 Oct 09:58:08 - info: compiled 6 files into 2 files, copied 3 in 1.7 s
 
 比如，我们可以输入 `Com` 然后按 Tab 键：
 
-![iex tab 补全](img/04-iex-shell.png)
+![iex tab 补全](../img/04-iex-shell.png)
 
 `iex` 下自动补全 `Comeonin`，证明我们已经可以在 PhoenixMoment 项目中使用它。
 
@@ -261,4 +261,4 @@ index f3a7c44..8285d8e 100644
 
 运行测试，通过。
 
-下一章里，我们将做一些扫尾工作，然后结束用户注册模块。
+下一章里，我们将做一些[扫尾工作](09-optimize-ui.md)，然后结束用户注册模块。

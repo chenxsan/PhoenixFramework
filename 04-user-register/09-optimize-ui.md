@@ -4,13 +4,13 @@
 
 1. 错误信息不明显
 
-    ![Phoenix 用户名不为空的错误信息](img/04-users-blank-username.png)
+    ![Phoenix 用户名不为空的错误信息](../img/04-users-blank-username.png)
 
     截图中可以看到，“请填写”三个字不突出，很多时候用户会视而不见。
 
 2. 密码输入框
 
-    ![密码输入框](img/04-password-input.png)
+    ![密码输入框](../img/04-password-input.png)
 
     在密码框中输入的内容，现在是明文显示，正常应该是用 * 号代替。
 
@@ -44,7 +44,7 @@ index 5857c33..8b50f25 100644
 ```
 这样我们的错误提示界面就会变成：
 
-![用户名不为空](img/04-username-has-error.png)
+![用户名不为空](../img/04-username-has-error.png)
 
 非常醒目。至于 Phoenix 生成的模板里为什么不带 `has-error`，可以看 [github 上的一个 issue](https://github.com/phoenixframework/phoenix/issues/1961)。
 
@@ -204,3 +204,5 @@ index 6ee98f3..301add2 100644
 我们在代码中做了两点修改，一个是订正 `@valid_attrs`，另一个是修改 `Repo.get`，因为我们的 `User` 不再有 `password` 字段，所以应该从 `@valid_attrs` 中移除它，否则就会报错。
 
 再运行测试，全部通过。
+
+至此，我们完成所有用户注册相关的开发，下一章，开始进入[用户登录环节](../05-session/01-login.md)。

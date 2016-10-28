@@ -249,3 +249,5 @@ Finished in 0.1 seconds
 16 tests, 0 failures
 ```
 这样，我们就搞定了 `email` 所有的规则。如果你心里不踏实，可以打开页面人肉测试一番的 - 但建议你不要，要控制住这种欲望。
+
+下一章，我们开始编写 [`password` 规则](07-password-rules.md)。

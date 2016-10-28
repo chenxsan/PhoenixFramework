@@ -41,3 +41,4 @@ index bbe894b..7e659d6 100644
 
 再运行测试，通过。
 
+这样，我们就完成了所有 `username` 相关的规则，下一章，开始编写 [`email` 规则](06-email-rules.md)。

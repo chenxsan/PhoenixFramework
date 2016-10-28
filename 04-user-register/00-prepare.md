@@ -132,7 +132,7 @@ Generated phoenix_moment app
 
 是不是很惊讶？我们用 `mix phoenix.gen.html` 命令生成的样板，功能已经很完善了。目前来看，我们需要的，只是在样板基础上做点修改。
 
-接下来几个章节，我们将逐步完成本章开头列出的数据限制。
+[接下来](01-username-required.md)几个章节，我们将逐步完成本章开头列出的数据限制。
 
 
 

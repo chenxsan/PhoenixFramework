@@ -28,7 +28,9 @@
     9. [优化用户注册界面](04-user-register/09-optimize-ui.md)
 6. 会话
     1. [登录](05-session/01-login.md)
-    2. [退出登录](05-session/02-logout.md)
+    2. [注册成功自动登录](05-session/02-auto-login-user.md)
+    3. [退出登录](05-session/03-logout.md)
+    
 
 ## License & Copyright
 

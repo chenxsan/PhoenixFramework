@@ -1,8 +1,6 @@
 # 退出登录
 
-上一章，我们完成了[登录功能](05-session/01-login.md)，这一章里，我们将加上退出登录的功能。
-
-我们的页面在用户登录后，将显示**退出**按钮，用户点击后，即可退出登录。
+这一章里，我们将加上退出登录的功能。
 
 先写测试：
 
@@ -58,11 +56,11 @@ index aa4b218..aa95174 100644
 ```
 现在运行测试，已经能够通过。
 
-但我们还没有写好 `session_controller.ex` 文件中的 `delete` 函数。
+但我们还没写 `session_controller.ex` 文件中的 `delete` 函数。
 
 我们期望用户登录后点击“退出”，页面跳转到主页，并且显示“退出成功”。
 
-我们的测试将这么写：
+我们的测试这么写：
 
 ```elixir
 diff --git a/test/controllers/session_controller_test.exs b/test/controllers/session_controller_test.exs
@@ -99,7 +97,7 @@ index 6141f21..c50466d 100644
 +  end
  end
 ```
-接着我们根据测试调整 `session_controller.ex` 文件：
+接着我们根据测试中的要求调整 `session_controller.ex` 文件：
 
 ```elixir
 diff --git a/web/controllers/session_controller.ex b/web/controllers/session_controller.ex
@@ -118,4 +116,6 @@ index 60b746c..ea6916a 100644
    end
  end
 ```
-运行测试，全部通过。
+好了，运行测试，全部通过。
+
+下一章，我们给页面加上[登录/注册按钮](04-login-logout-buttons.md)。

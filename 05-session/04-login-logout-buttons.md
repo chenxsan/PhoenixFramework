@@ -42,4 +42,4 @@ index aa95174..5badfd7 100644
 ```
 运行测试，通过。
 
-下一章，我们要对[用户列表页面做个限制](05-restrict-access.md)。
+下一章，我们要对[用户列表页做个限制](../06-security/01-restrict-access.md)。

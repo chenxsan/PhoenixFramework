@@ -18,7 +18,7 @@ index c6e57d3..de94c3e 100644
 +    |> PhoenixMoment.Repo.insert!
 +
 +    # 插入同名用户，应该抛出错误
-+    user = %User{} |> User.changeset(@valid_attrs | email: "1@2.com")
++    user = %User{} |> User.changeset(%{@valid_attrs | email: "1@2.com"})
 +    assert {:error, changeset} = PhoenixMoment.Repo.insert(user)
 +
 +    # 处理错误消息

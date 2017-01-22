@@ -1,4 +1,4 @@
-# PhonixFramework 开发准备工作
+# PhoenixFramework 开发准备工作
 
 如果英文阅读能力允许的话，建议你直接阅读 [PhoenixFramework 官方安装指南](http://www.phoenixframework.org/docs/installation)。中文内容基于英文，更新不一定及时。
 

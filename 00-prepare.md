@@ -2,13 +2,15 @@
 
 如果你的英文不错，建议直接查阅 [PhoenixFramework 官方的安装指南](http://www.phoenixframework.org/docs/installation)。
 
-以下为中文版的简略安装指南，顺利的话，全程应该在 20 分钟内搞定，请确保网络畅通。
+以下为中文版的简略安装说明，请确保网络畅通。
 
 ## 安装 Erlang
 
 PhoenixFramework 基于 Elixir 开发，而 Elixir 又依赖 Erlang，因此，我们需要事先安装 Erlang。
 
 请参照 Elixir 官网上提供的[说明](http://elixir-lang.org/install.html#installing-erlang)安装 Erlang。
+
+注：如果你是在 macOS 下使用 Homebrew 安装 Elixir，则它会同时安装 Erlang，我们可以省去这一个步骤。
 
 安装完成后，我们可以在命令行窗口下输入：
 
@@ -20,8 +22,6 @@ erl -eval 'erlang:display(erlang:system_info(otp_release)), halt().'  -noshell
 ## 安装 Elixir
 
 前面说到的，Phoenix 是用 [Elixir 语言](http://elixir-lang.org/)开发的，因此，我们还需要在开发机器上安装 Elixir。请参照 [Elixir 官网的安装文档](http://elixir-lang.org/install.html)。
-
-注：如果你是在 macOS 下使用 Homebrew 安装 Elixir，则它会同时安装 Erlang，我们可以省去前面一个步骤。
 
 在安装完 Elixir 后，打开命令行窗口，输入：
 

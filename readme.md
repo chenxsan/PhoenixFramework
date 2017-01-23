@@ -8,7 +8,6 @@
 
 1. Elixir - 1.4.0
 2. PhoenixFramework - 1.2.1
-3. Ecto - 2.0.5
 
 ## 目录
 

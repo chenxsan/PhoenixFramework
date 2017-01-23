@@ -14,7 +14,7 @@
 1. [准备工作](00-prepare.md)
 2. [创建项目](01-create-project.md)
 3. [Phoenix 初探](02-explore-phoenix.md)
-4. [PhoenixMoment 项目规划](03-phoenix-moment.md)
+4. [TvRecipe 项目规划](03-tv-recipe.md)
 5. [注册用户](04-user-register/00-prepare.md)
     1. [username 必填](04-user-register/01-username-required.md)
     2. [username 已被人占用](04-user-register/02-username-unique.md)

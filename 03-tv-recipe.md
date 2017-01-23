@@ -1,8 +1,8 @@
-# PhoenixMoment 项目规划
+# TvRecipe 项目规划
 
-在前几章，我们创建了 PhoenixMoment 项目用于演示。这一章里，我们要对 PhoenixMoment 项目做一个规划。我们的目标是，在教程结束时，你基本掌握 Phoenix 开发的基础，同时完成 [PhoenixMoment 项目的开发与部署](https://github.com/chenxsan/PhoenixMoment)。
+在前几章，我们创建了 TvRecipe 项目。这一章里，我们要对 TvRecipe 项目做一个规划。我们的目标是，教程结束时，你基本掌握 Phoenix 开发的基础，同时完成 [TvRecipe 项目](https://github.com/chenxsan/tv-recipe)的开发与部署。
 
-简单说，PhoenixMoment 项目在我的设计里，类似轻博客，用户可以用邮箱注册，登录后则可以发布内容，还可以评论、收藏别人的内容。
+简单说，TvRecipe 项目在我的设计里，类似轻博客，用户可以用邮箱注册，登录后则可以发布菜谱，还可以评论、收藏别人的菜谱。
 
 我们的模块大致划分如下：
 
@@ -11,14 +11,14 @@
 2. 会话模块
     1. 登录
     2. 退出登录
-3. moment 模块
-    1. 发布 moment
-    2. 删除 moment
+3. 菜谱模块
+    1. 发布菜谱
+    2. 删除菜谱
 4. 评论模块
     1. 发布评论
     2. 删除评论
 5. 收藏模块
-    1. 收藏 moment
+    1. 收藏菜谱
     2. 取消收藏
 
 下一章，我们就开始开发[用户注册的功能](04-user-register/00-prepare.md)。
@@ -27,14 +27,14 @@
 
 1. 代码块
 
-    你会在后面的教程里看到大量代码块：
+    你在后面的教程里会看到大量这样的代码块：
 
     ```elixir
     diff --git a/test/models/user_test.exs b/test/models/user_test.exs
     index accc8ec..a81988a 100644
     --- a/test/models/user_test.exs
     +++ b/test/models/user_test.exs
-    @@ -44,4 +44,9 @@ defmodule PhoenixMoment.UserTest do
+    @@ -44,4 +44,9 @@ defmodule TvRecipe.UserTest do
         changeset = User.changeset(%User{}, attrs)
         refute changeset.valid?
     end
@@ -47,4 +47,4 @@
     ```
     如果你用过 [Git](https://github.com/git/git)，你可能很熟悉，这是 git diff 的结果。
     
-    如果你没用过 git，你只需要关注带有 + - 号的代码行，+ 号表示在代码块里增加该行，- 号表示从代码中删除该行。
+    如果你没用过 git，则只需要关注带有 + - 号的代码行：+ 号表示在代码块里增加该行，- 号表示从代码中删除该行。

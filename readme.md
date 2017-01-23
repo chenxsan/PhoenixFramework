@@ -6,7 +6,7 @@
 
 教程中使用的软件版本号如下：
 
-1. Elixir - 1.3.4
+1. Elixir - 1.4.0
 2. PhoenixFramework - 1.2.1
 3. Ecto - 2.0.5
 

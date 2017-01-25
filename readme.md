@@ -1,13 +1,13 @@
-# PhoenixFramework 中文入门教程
+# Phoenix Framework 中文入门教程
 
 我本前端开发。
 
-你可以想像，PhoenixFramework 有多么容易上手。
+你可以想像，Phoenix Framework 有多么容易上手。
 
 教程中使用的软件版本号如下：
 
 1. Elixir - 1.4.0
-2. PhoenixFramework - 1.2.1
+2. Phoenix Framework - 1.2.1
 
 ## 目录
 

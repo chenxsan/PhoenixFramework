@@ -1,12 +1,12 @@
-# PhoenixFramework 开发准备工作
+# Phoenix Framework 开发准备工作
 
-如果你的英文不错，建议直接查阅 [PhoenixFramework 官方的安装指南](http://www.phoenixframework.org/docs/installation)。
+如果你的英文不错，建议直接查阅 [Phoenix Framework 官方的安装指南](http://www.phoenixframework.org/docs/installation)。
 
 以下为中文版的简略安装说明，请确保网络畅通。
 
 ## 安装 Erlang
 
-PhoenixFramework 基于 Elixir 开发，而 Elixir 又依赖 Erlang，因此，我们需要事先安装 Erlang。
+Phoenix Framework 基于 Elixir 开发，而 Elixir 又依赖 Erlang，因此，我们需要事先安装 Erlang。
 
 请参照 Elixir 官网上提供的[说明](http://elixir-lang.org/install.html#installing-erlang)安装 Erlang。
 

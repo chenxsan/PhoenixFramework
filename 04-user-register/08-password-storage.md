@@ -1,38 +1,38 @@
 # 安全存储密码
 
-如果你在前面章节里，曾注册过用户，则打开 [http://localhost:4000/users](http://localhost:4000/users) 网址，你会看到类似如下截图的内容：
+如果你在前面章节里，曾在浏览器里打开过页面，注册过用户，则打开 [http://localhost:4000/users](http://localhost:4000/users) 网址，你会看到类似如下截图的内容：
 
 ![users list](../img/04-user-list.png)
 
 密码字段一览无余，如果数据库被人入侵，则用户密码全部暴露。
 
-所以，这一章里，我们要对用户密码做哈希处理，然后才保存到数据库中。我们要用到第三方的 [Comeonin](https://github.com/riverrun/comeonin) 库。
+所以，这一章里，我们要先对用户密码做哈希处理，然后才保存到数据库中。我们要用到第三方的 [Comeonin](https://github.com/riverrun/comeonin) 库。
 
 ## 添加依赖
 
-首先，打开项目依赖管理文件 `mix.exs`，在文件中添加 `comeonin`：
+首先，打开项目依赖管理文件 `mix.exs`，在文件中添加 `comeonin` 依赖：
 
 ```elixir
 diff --git a/mix.exs b/mix.exs
-index 72666bc..513a0b7 100644
+index a71d654..3320fc8 100644
 --- a/mix.exs
 +++ b/mix.exs
-@@ -19,7 +19,7 @@ defmodule PhoenixMoment.Mixfile do
+@@ -19,7 +19,7 @@ defmodule TvRecipe.Mixfile do
    def application do
-     [mod: {PhoenixMoment, []},
+     [mod: {TvRecipe, []},
       applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
 -                    :phoenix_ecto, :postgrex]]
 +                    :phoenix_ecto, :postgrex, :comeonin]]
    end
 
    # Specifies which paths to compile per environment.
-@@ -37,7 +37,8 @@ defmodule PhoenixMoment.Mixfile do
+@@ -37,7 +37,8 @@ defmodule TvRecipe.Mixfile do
       {:phoenix_html, "~> 2.6"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
 -     {:cowboy, "~> 1.0"}]
 +     {:cowboy, "~> 1.0"},
-+     {:comeonin, "~> 2.5"}]
++     {:comeonin, "~> 3.0"}]
    end
    ```
 
@@ -45,7 +45,7 @@ $ mix do deps.get, compile
 ```
 该命令从远程下载了我们新增的 `comeonin` 依赖并编译。
 
-那么，怎么确认 `comeonin` 安装成功？在之前，我们一直是用 `mix phoenix.server` 命令来启动服务器的，接下来，我们要换一种启动方式：
+那么，怎么确认 `comeonin` 安装成功？之前，我们一直是用 `mix phoenix.server` 命令来启动服务器的，接下来，我们要换一种启动方式：
 
 ```bash
 $ iex -S mix phoenix.server
@@ -54,11 +54,11 @@ $ iex -S mix phoenix.server
 
 ```
 $ iex -S mix phoenix.server
-Erlang/OTP 19 [erts-8.1] [source] [64-bit] [smp:4:4] [async-threads:10] [hipe] [kernel-poll:false] [dtrace]
+Erlang/OTP 19 [erts-8.2] [source] [64-bit] [smp:4:4] [async-threads:10] [hipe] [kernel-poll:false] [dtrace]
 
-[info] Running PhoenixMoment.Endpoint with Cowboy using http://localhost:4000
-Interactive Elixir (1.3.4) - press Ctrl+C to exit (type h() ENTER for help)
-iex(1)> 26 Oct 09:58:08 - info: compiled 6 files into 2 files, copied 3 in 1.7 sec
+[info] Running TvRecipe.Endpoint with Cowboy using http://localhost:4000
+Interactive Elixir (1.4.0) - press Ctrl+C to exit (type h() ENTER for help)
+iex(1)> 25 Jan 09:53:09 - info: compiled 6 files into 2 files, copied 3 in 2.1 sec
 ```
 看到区别了么？我们用 `iex -S mix phoenix.server` 启动后，可以使用 Elixir 的 [`iex`](http://elixir-lang.org/docs/stable/iex/IEx.html)。
 
@@ -66,29 +66,29 @@ iex(1)> 26 Oct 09:58:08 - info: compiled 6 files into 2 files, copied 3 in 1.7 s
 
 ![iex tab 补全](../img/04-iex-shell.png)
 
-`iex` 下自动补全 `Comeonin`，证明我们已经可以在 PhoenixMoment 项目中使用它。
+`iex` 下自动补全 `Comeonin`，证明我们已经可以在 TvRecipe 项目中使用它。
 
 ## `password` 字段的处理
 
-现在的情况是，数据库不打算存储 `password`，因为它是明文的。我们要把哈希处理后的密码存入另一个字段，比如 `password_hash`。
+我们现在面对的情况是，数据库不应该存储 `password`，因为它是明文的。我们要把哈希处理后的密码存入另一个字段，比如 `password_hash`。
 
-但我们的数据库里只有 `password` 字段，还没有 `password_hash`。怎么办？我们仍通过 migration 来做增减。
+但我们的数据库现在只有 `password` 字段，还没有 `password_hash`。怎么办？我们仍通过迁移（migration）来做增删。
 
 1. 创建 migration 文件
 
     ```bash
     $ mix ecto.gen.migration alter_user_table
     * creating priv/repo/migrations
-    * creating priv/repo/migrations/20161026040715_alter_user_table.exs
+    * creating priv/repo/migrations/20170125015912_alter_user_table.exs
     ```
-2. 打开新建的 `20161026040715_alter_user_table.exs` 文件，[`remove`](https://hexdocs.pm/ecto/Ecto.Migration.html#remove/1) 掉 `password` 字段，然后 [`add`](https://hexdocs.pm/ecto/Ecto.Migration.html#add/3) `password_hash` 字段：
+2. 打开新建的 `20170125015912_alter_user_table.exs` 文件，[`remove`](https://hexdocs.pm/ecto/Ecto.Migration.html#remove/1) 掉 `password` 字段，然后 [`add`](https://hexdocs.pm/ecto/Ecto.Migration.html#add/3) `password_hash` 字段：
 
     ```elixir
-    diff --git a/priv/repo/migrations/20161026040715_alter_user_table.exs b/priv/repo/migrations/20161026040715_alter_user_table.exs
-    index 31d8f6e..0d77b96 100644
-    --- a/priv/repo/migrations/20161026040715_alter_user_table.exs
-    +++ b/priv/repo/migrations/20161026040715_alter_user_table.exs
-    @@ -2,6 +2,9 @@ defmodule PhoenixMoment.Repo.Migrations.AlterUserTable do
+    diff --git a/priv/repo/migrations/20170125015912_alter_user_table.exs b/priv/repo/migrations/20170125015912_alter_user_table.exs
+    index 2a25ba8..e783c65 100644
+    --- a/priv/repo/migrations/20170125015912_alter_user_table.exs
+    +++ b/priv/repo/migrations/20170125015912_alter_user_table.exs
+    @@ -2,6 +2,9 @@ defmodule TvRecipe.Repo.Migrations.AlterUserTable do
       use Ecto.Migration
 
       def change do
@@ -100,27 +100,27 @@ iex(1)> 26 Oct 09:58:08 - info: compiled 6 files into 2 files, copied 3 in 1.7 s
       end
     end
     ```
-3. 执行 `mix ecto.migrate` 落实 migration 中的修改：
+3. 执行 `mix ecto.migrate` 修改数据库：
 
     ```bash
     $ mix ecto.migrate
 
-    12:11:15.204 [info]  == Running PhoenixMoment.Repo.Migrations.AlterUserTable.change/0 forward
+    10:17:57.648 [info]  == Running TvRecipe.Repo.Migrations.AlterUserTable.change/0 forward
 
-    12:11:15.204 [info]  alter table users
+    10:17:57.648 [info]  alter table users
 
-    12:11:15.243 [info]  == Migrated in 0.0s
+    10:17:57.685 [info]  == Migrated in 0.0s
     ```
 4. 在上一步里，我们修改了数据库里 `users` 表的结构。那么，`user.ex` 文件中的 `password` 字段怎么办？要删除吗？删除了话，前面做的那些围绕 `password` 的验证怎么办？
 
-    不，我们要留着 `password`，但要给它加上 `virtual: true`，表示它是个临时字段，不存储到数据库中：
+    不，我们留着 `password`，但要给它加上 `virtual: true`，表示它是个临时字段，不存储到数据库中：
 
     ```elixir
     diff --git a/web/models/user.ex b/web/models/user.ex
-    index 0796d93..bf2a66f 100644
+    index 3069e79..e60e839 100644
     --- a/web/models/user.ex
     +++ b/web/models/user.ex
-    @@ -4,7 +4,8 @@ defmodule PhoenixMoment.User do
+    @@ -4,7 +4,8 @@ defmodule TvRecipe.User do
       schema "users" do
         field :username, :string
         field :email, :string
@@ -129,6 +129,7 @@ iex(1)> 26 Oct 09:58:08 - info: compiled 6 files into 2 files, copied 3 in 1.7 s
     +    field :password_hash, :string
 
         timestamps()
+      end
       end
     ```
     你可能会好奇，不加 `virtual: true` 会怎样，会这样：
@@ -144,7 +145,7 @@ iex(1)> 26 Oct 09:58:08 - info: compiled 6 files into 2 files, copied 3 in 1.7 s
 
 话说回来，我们做了这么多的修改，是否破坏了代码呢？我们可以运行测试，确证下。
 
-一切顺利。那就继续下一步。
+测试证明，一切顺利。我们继续。
 
 ## 存储哈希后的密码
 
@@ -165,11 +166,11 @@ iex(1)> 26 Oct 09:58:08 - info: compiled 6 files into 2 files, copied 3 in 1.7 s
     struct
     |> cast(params, [:username, :email, :password])
     |> validate_required([:username, :email, :password], message: "请填写")
+    |> validate_format(:username, ~r/^[a-zA-Z0-9_]+$/, message: "用户名只允许使用英文字母、数字及下划线")
     |> validate_length(:username, min: 3, message: "用户名最短 3 位")
     |> validate_length(:username, max: 15, message: "用户名最长 15 位")
-    |> unique_constraint(:username, name: :users_lower_username_index, message: "用户名已被人占用")
-    |> validate_format(:username, ~r/^[a-zA-Z0-9_]+$/, message: "用户名只允许使用英文字母、数字及下划线")
     |> validate_exclusion(:username, ~w(admin administrator), message: "系统保留，无法注册，请更换")
+    |> unique_constraint(:username, name: :users_lower_username_index, message: "用户名已被人占用")
     |> validate_format(:email, ~r/@/, message: "邮箱格式错误")
     |> unique_constraint(:email, name: :users_lower_email_index, message: "邮箱已被人占用")
     |> validate_length(:password, min: 6, message: "密码最短 6 位")
@@ -179,10 +180,10 @@ iex(1)> 26 Oct 09:58:08 - info: compiled 6 files into 2 files, copied 3 in 1.7 s
 
 ```elixir
 diff --git a/web/models/user.ex b/web/models/user.ex
-index bf2a66f..f64aaab 100644
+index e60e839..58447c0 100644
 --- a/web/models/user.ex
 +++ b/web/models/user.ex
-@@ -25,5 +25,6 @@ defmodule PhoenixMoment.User do
+@@ -25,5 +25,6 @@ defmodule TvRecipe.User do
      |> validate_format(:email, ~r/@/, message: "邮箱格式错误")
      |> unique_constraint(:email, name: :users_lower_email_index, message: "邮箱已被人占用")
      |> validate_length(:password, min: 6, message: "密码最短 6 位")
@@ -190,7 +191,7 @@ index bf2a66f..f64aaab 100644
    end
  end
 ```
-[`|>`](http://elixir-lang.org/getting-started/enumerables-and-streams.html#the-pipe-operator) 是 Elixir 的管道操作符，如果你用过 Linux/Unix 的 pipe，你可能已经很清楚。
+顺便解释一下，[`|>`](http://elixir-lang.org/getting-started/enumerables-and-streams.html#the-pipe-operator) 是 Elixir 的管道操作符，如果你用过 Linux/Unix 的 pipe，你可能已经很清楚。
 
 如果你没用过，则可以这么理解，`|>` 前的函数会返回一个数据，这个数据作为第一个参数传入给 `|>` 后函数。
 
@@ -204,14 +205,14 @@ changeset = put_password_hash(changeset)
 ```
 当然，没人喜欢这么写。
 
-现在，我们还定义 `put_password_hash` 函数：
+现在，我们来定义 `put_password_hash` 函数：
 
 ```elixir
 diff --git a/web/models/user.ex b/web/models/user.ex
-index f64aaab..167cc13 100644
+index 58447c0..690a1ed 100644
 --- a/web/models/user.ex
 +++ b/web/models/user.ex
-@@ -27,4 +27,13 @@ defmodule PhoenixMoment.User do
+@@ -27,4 +27,13 @@ defmodule TvRecipe.User do
      |> validate_length(:password, min: 6, message: "密码最短 6 位")
      |> put_password_hash()
    end
@@ -229,7 +230,7 @@ index f64aaab..167cc13 100644
 
 这里，涉及了 Elixir 的几个知识。
 
-不过先插一段闲话。不知道你发现没有，从第一章到现在，我都没有提过，学习 PhoenixFramework 要掌握 Elixir 到什么程度。我认为，哪怕不懂 Elixir，也是可以学 Phoenix 的。**用**是最快的学习方式，碰上不懂的，再去借助搜索引擎，这样才有的放矢。等到时机成熟，再完整地学习一遍 Elixir，因为有了实践经验，就不会一头雾水。
+不过先插一段闲话。不知道你发现没有，从第一章到现在，我都没有提过，学习 PhoenixFramework 要掌握 Elixir 到什么程度。从我个人的经验说，哪怕不懂 Elixir，也是可以学 Phoenix 的。**用**是最快的学习方式，碰上不懂的，再去借助搜索引擎，这样才有的放矢。等到时机成熟，再完整地学习一遍 Elixir，因为有了实践经验，一切就会水到渠成。
 
 好了，我们来解释下上面的几个新知识点：
 
@@ -244,21 +245,59 @@ index f64aaab..167cc13 100644
 
 ```elixir
 diff --git a/test/models/user_test.exs b/test/models/user_test.exs
-index f3a7c44..8285d8e 100644
+index 8689f4e..6e946b0 100644
 --- a/test/models/user_test.exs
 +++ b/test/models/user_test.exs
-@@ -150,4 +150,9 @@ defmodule PhoenixMoment.UserTest do
-     attrs = %{@valid_attrs | password: "12345"}
+@@ -112,4 +112,9 @@ defmodule TvRecipe.UserTest do
+     attrs = %{@valid_attrs | password: String.duplicate("1", 5)}
      assert {:password, "密码最短 6 位"} in errors_on(%User{}, attrs)
    end
 +
-+  test "password should be hashed and put into password_hash" do
++  test "password should be hashed" do
 +    %{changes: changes} = User.changeset(%User{}, @valid_attrs)
 +    assert Comeonin.Bcrypt.checkpw(changes.password, changes.password_hash)
 +  end
  end
 ```
 
-运行测试，通过。
+运行测试：
+
+```bash
+mix test test/models/user_test.exs
+.................
+
+Finished in 4.2 seconds
+17 tests, 0 failures
+```
+如果你眼尖，可能已经已经注意到，我们的测试时间变长了，之前多是零点几秒，现在一下变成 4.2 秒。
+
+这是引入的 `comeonin` 依赖导致的，密码加密需要大量时间，而我们在测试时，并不需要高强度的密码加密。
+
+我们可以在 `test.exs` 文件中 调整 `comeonin` 的[配置](https://hexdocs.pm/comeonin/Comeonin.Config.html#module-examples)：
+
+```elixir
+diff --git a/config/test.exs b/config/test.exs
+index 0ff4a98..1743d57 100644
+--- a/config/test.exs
++++ b/config/test.exs
+@@ -17,3 +17,7 @@ config :tv_recipe, TvRecipe.Repo,
+   database: "tv_recipe_test",
+   hostname: "localhost",
+   pool: Ecto.Adapters.SQL.Sandbox
++
++config :comeonin,
++  bcrypt_log_rounds: 4,
++  pbkdf2_rounds: 1_000
+```
+再次运行测试：
+
+```bash
+mix test test/models/user_test.exs
+.................
+
+Finished in 0.2 seconds
+17 tests, 0 failures
+```
+我们的测试又快起来了。
 
 下一章里，我们将做一些[扫尾工作](09-optimize-ui.md)，然后结束用户注册模块。

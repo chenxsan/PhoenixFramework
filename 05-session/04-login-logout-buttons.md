@@ -81,4 +81,54 @@ index 8d8a6f5..8b9b38b 100644
 ```
 我们在 `session_controller.ex` 与 `user_controller.ex` 两个文件中加入了 `configure_session(renew: true)`，用于预防 [session fixation 攻击](https://www.owasp.org/index.php/Session_fixation)。
 
+另外，本着 DRY 的原则，我们可以将登录的逻辑合并到 `auth.ex` 文件中：
+
+```elixir
+diff --git a/web/controllers/auth.ex b/web/controllers/auth.ex
+index 994112d..e298b68 100644
+--- a/web/controllers/auth.ex
++++ b/web/controllers/auth.ex
+@@ -15,4 +15,10 @@ defmodule TvRecipe.Auth do
+     assign(conn, :current_user, user)
+   end
+
++  def login(conn, user) do
++    conn
++    |> put_session(:user_id, user.id)
++    |> configure_session(renew: true)
++  end
++
+ end
+
+diff --git a/web/controllers/session_controller.ex b/web/controllers/session_controller.ex
+index 0c2eb0a..6f29ce0 100644
+--- a/web/controllers/session_controller.ex
++++ b/web/controllers/session_controller.ex
+@@ -13,9 +13,8 @@ defmodule TvRecipe.SessionController do
+       # 用户存在，且密码正确
+       user && Comeonin.Bcrypt.checkpw(password, user.password_hash) ->
+         conn
+-        |> put_session(:user_id, user.id)
+         |> put_flash(:info, "欢迎你")
+-        |> configure_session(renew: true)
++        |> TvRecipe.Auth.login(user)
+         |> redirect(to: page_path(conn, :index))
+       # 用户存在，但密码错误
+       user ->
+diff --git a/web/controllers/user_controller.ex b/web/controllers/user_controller.ex
+index 8b9b38b..b9234b1 100644
+--- a/web/controllers/user_controller.ex
++++ b/web/controllers/user_controller.ex
+@@ -20,8 +20,7 @@ defmodule TvRecipe.UserController do
+       {:ok, user} ->
+         conn
+         |> put_flash(:info, "User created successfully.")
+-        |> put_session(:user_id, user.id)
+-        |> configure_session(renew: true)
++        |> TvRecipe.Auth.login(user)
+         |> redirect(to: page_path(conn, :index))
+       {:error, changeset} ->
+         render(conn, "new.html", changeset: changeset)
+```
+
 下一章，我们要对[用户相关页面做些限制](../06-restrict-access.md)，以保证数据的安全。

@@ -32,6 +32,13 @@
     4. [登录/注册按钮](05-session/04-login-logout-buttons.md)
 7. [限制访问](06-restrict-access.md)
     
+## 源代码
+
+[https://github.com/chenxsan/tv-recipe](https://github.com/chenxsan/tv-recipe)
+
+## 演示
+
+[https://tv-recipe.herokuapp.com/](https://tv-recipe.herokuapp.com/)
 
 ## License & Copyright
 

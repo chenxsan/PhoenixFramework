@@ -30,6 +30,7 @@
     2. [注册成功自动登录](05-session/02-auto-login-user.md)
     3. [退出登录](05-session/03-logout.md)
     4. [登录/注册按钮](05-session/04-login-logout-buttons.md)
+7. [限制访问](06-restrict-access.md)
     
 
 ## License & Copyright

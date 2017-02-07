@@ -31,6 +31,9 @@
     3. [退出登录](05-session/03-logout.md)
     4. [登录/注册按钮](05-session/04-login-logout-buttons.md)
 7. [限制访问](06-restrict-access.md)
+8. 菜谱
+    1. [生成菜谱样板文件](07-recipe/01-gen-html.md)
+    2. [菜谱属性开发](07-recipe/02-recipe-scheme.md)
     
 ## 源代码
 

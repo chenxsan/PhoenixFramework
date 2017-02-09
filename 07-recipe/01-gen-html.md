@@ -4,14 +4,14 @@
 
 我们先来确认下，菜谱有哪些属性需要保存：
 
-属性名|类型|备注|是否必填
----|---|---|---
-name|string|菜谱名|必填
-title|string|节目名|必填
-season|integer|第几季|必填
-episode|integer|第几集|必填
-content|text|内容|必填
-user_id|integer|关联用户的 id|必填
+属性名|类型|备注|是否必填|默认值
+---|---|---|---|---
+name|string|菜谱名|必填|
+title|string|节目名|必填|
+season|integer|第几季|必填|1
+episode|integer|第几集|必填|1
+content|text|内容|必填|
+user_id|integer|关联用户 id|必填|
 
 这里我们可以直接使用 `mix phoenix.gen.html` 命令来生成菜谱相关的所有文件：
 
@@ -71,6 +71,12 @@ index e0811dc..a6d7cd5 100644
     
     ```elixir
     has_many :recipes, TvRecipe.Recipe
+    ```
+3. 我们需要在 `recipe.ex` 文件中给 `season` 与 `episode` 设置默认值：
+
+    ```elixir
+    field :season, :integer, default: 1
+    field :episode, :integer, default: 1
     ```
 现在，我们可以执行 `mix ecto.migrate` 了：
 

@@ -34,6 +34,8 @@
 8. 菜谱
     1. [生成菜谱样板文件](07-recipe/01-gen-html.md)
     2. [菜谱属性开发](07-recipe/02-recipe-scheme.md)
+    3. [菜谱控制器开发](07-recipe/03-recipe-controller.md)
+    4. [菜谱视图的测试](07-recipe/04-recipe-view.md)
     
 ## 源代码
 

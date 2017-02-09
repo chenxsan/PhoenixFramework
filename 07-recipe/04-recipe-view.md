@@ -108,7 +108,7 @@ Compiling 1 file (.ex)
 ....................................................
 
 Finished in 0.8 seconds
-56 tests, 1 failure
+58 tests, 1 failure
 ```
 一个错误发生，因为目前的 `index.html.eex` 中包含了 `content` 与 `user_id` 的内容。
 
@@ -146,7 +146,7 @@ mix test
 ........................................................
 
 Finished in 0.8 seconds
-56 tests, 0 failures
+58 tests, 0 failures
 ```
 悉数通过。
 

@@ -60,6 +60,16 @@ index a974aad..27f02ea 100644
 +    assert {:episode, "请填写"} in errors_on(%Recipe{}, attrs)
 +  end
 +
++  test "season should greater than 0" do
++    attrs = %{@valid_attrs | season: 0}
++    assert {:season, "请输入大于 0 的数字"} in errors_on(%Recipe{}, attrs)
++  end
++
++  test "episode should greater than 0" do
++    attrs = %{@valid_attrs | episode: 0}
++    assert {:episode, "请输入大于 0 的数字"} in errors_on(%Recipe{}, attrs)
++  end
++
 +  test "content is required" do
 +    attrs = %{@valid_attrs | content: ""}
 +    assert {:content, "请填写"} in errors_on(%Recipe{}, attrs)
@@ -79,11 +89,11 @@ index 946d45c..8d34ed2 100644
      |> cast(params, [:name, :title, :season, :episode, :content])
 -    |> validate_required([:name, :title, :season, :episode, :content])
 +    |> validate_required([:name, :title, :season, :episode, :content], message: "请填写")
++    |> validate_number(:season, greater_than: 0, message: "请输入大于 0 的数字")
++    |> validate_number(:episode, greater_than: 0, message: "请输入大于 0 的数字")
    end
  end
 ```
-测试全部通过了。
-
 ## `user_id`
 
 `user_id` 有两条规则：
@@ -138,24 +148,23 @@ index 8d34ed2..0520582 100644
    end
  end
 ```
-运行新增的这个测试：
+运行新增的测试：
 
 ```bash
-$ mix test test/models/recipe_test.exs:44
-mix test test/models/recipe_test.exs:44
-Including tags: [line: "44"]
+$ mix test test/models/recipe_test.exs:54
+Including tags: [line: "54"]
 Excluding tags: [:test]
 
 .
 
 Finished in 0.1 seconds
-8 tests, 0 failures, 7 skipped
+10 tests, 0 failures, 9 skipped
 ```
-注意，我们只测试前面新增的测试，`:44` 表示执行该文件中第 44 行开始的 `test` 块。
+注意，我们只测试前面新增的测试，`:54` 表示执行该文件中第 54 行开始的 `test` 块。
 
 ### `user_id` 所指向的用户应存在
 
-我们在 `recipe_test.exs` 文件中再增加一个测试：
+我们在 `recipe_test.exs` 文件中再增加一个测试，确保 `user_id` 所指的用户存在：
 
 ```elixir
 diff --git a/test/models/recipe_test.exs b/test/models/recipe_test.exs
@@ -185,15 +194,15 @@ index 3a9630b..2e1191c 100644
 运行新增的测试：
 
 ```bash
-$ mix test test/models/recipe_test.exs:49
+$ mix test test/models/recipe_test.exs:59
 Compiling 13 files (.ex)
-Including tags: [line: "49"]
+Including tags: [line: "59"]
 Excluding tags: [:test]
 
 
 
   1) test user_id should exist in users table (TvRecipe.RecipeTest)
-     test/models/recipe_test.exs:49
+     test/models/recipe_test.exs:59
      ** (Ecto.ConstraintError) constraint error when attempting to insert struct:
 
          * foreign_key: recipes_user_id_fkey
@@ -212,12 +221,12 @@ Excluding tags: [:test]
        (db_connection) lib/db_connection.ex:1274: DBConnection.transaction_run/4
        (db_connection) lib/db_connection.ex:1198: DBConnection.run_begin/3
        (db_connection) lib/db_connection.ex:789: DBConnection.transaction/3
-       test/models/recipe_test.exs:50: (test)
+       test/models/recipe_test.exs:60: (test)
 
 
 
 Finished in 0.2 seconds
-9 tests, 1 failure, 8 skipped
+11 tests, 1 failure, 10 skipped
 ```
 测试失败，但 Phoenix 给了 [foreign_key_constraint](https://hexdocs.pm/ecto/Ecto.Changeset.html#foreign_key_constraint/3) 的提示：
 
@@ -237,15 +246,15 @@ index 0520582..a0b42fd 100644
 再次运行测试：
 
 ```bash
-$ mix test test/models/recipe_test.exs:49
+$ mix test test/models/recipe_test.exs:59
 Compiling 13 files (.ex)
-Including tags: [line: "49"]
+Including tags: [line: "59"]
 Excluding tags: [:test]
 
 .
 
 Finished in 0.1 seconds
-9 tests, 0 failures, 8 skipped
+11 tests, 0 failures, 10 skipped
 ```
 测试通过。
 
@@ -274,6 +283,6 @@ $ mix test
 ..........
 
 Finished in 0.6 seconds
-54 tests, 2 failures
+56 tests, 2 failures
 ```
 `recipe_controller_test.exs` 文件中出现两个错误 - 不过我们留给下一章处理。

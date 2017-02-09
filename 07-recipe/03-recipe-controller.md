@@ -79,7 +79,7 @@ $ mix test
 ......................................................
 
 Finished in 0.8 seconds
-54 tests, 0 failures
+56 tests, 0 failures
 ```
 非常好，全部通过了。
 
@@ -364,7 +364,7 @@ $ mix test
 ......................................................
 
 Finished in 0.7 seconds
-54 tests, 0 failures
+56 tests, 0 failures
 ```
 一切顺利。
 
@@ -462,7 +462,7 @@ $ mix test
 .............................
 
 Finished in 0.7 seconds
-56 tests, 1 failure
+58 tests, 1 failure
 ```
 测试失败：登录状态下的用户 A 给用户 B 创建了一个菜谱。
 
@@ -696,7 +696,7 @@ mix test
 .....................................................
 
 Finished in 0.7 seconds
-53 tests, 0 failures
+55 tests, 0 failures
 ```
 全部通过。
 
@@ -749,7 +749,7 @@ Compiling 1 file (.ex)
 .....................
 
 Finished in 0.8 seconds
-54 tests, 1 failure
+56 tests, 1 failure
 ```
 Oops，报错了，我们期望响应是 404，却得到 200。
 
@@ -805,7 +805,7 @@ $ mix test
 ...........................
 
 Finished in 0.8 seconds
-54 tests, 1 failure
+56 tests, 1 failure
 ```
 我们修复了前面一个错误，但因为我们的修复代码导致了另一个新错误。
 
@@ -835,7 +835,7 @@ $ mix test
 ......................................................
 
 Finished in 0.8 seconds
-54 tests, 0 failures
+56 tests, 0 failures
 ```
 通过了。
 
@@ -1001,7 +1001,7 @@ Compiling 13 files (.ex)
 .........
 
 Finished in 0.7 seconds
-55 tests, 1 failure
+57 tests, 1 failure
 ```
 很好，`foreign_key_constraint` 的提示又出来了。修改 `recipe.ex` 文件：
 
@@ -1026,7 +1026,7 @@ Compiling 13 files (.ex)
 .......................................................
 
 Finished in 0.7 seconds
-55 tests, 0 failures
+57 tests, 0 failures
 ```
 
 悉数通过。至此，我们完成了 `RecipeController` 的测试。下一章，我们将接触 View 的测试。

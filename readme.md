@@ -36,7 +36,13 @@
     2. [菜谱属性开发](07-recipe/02-recipe-scheme.md)
     3. [菜谱控制器开发](07-recipe/03-recipe-controller.md)
     4. [菜谱视图的测试](07-recipe/04-recipe-view.md)
-    
+
+## 捐款
+
+如果教程对您有所帮助，欢迎扫描下方的支付宝二维码给我捐款（请备注您的 github 用户名）：
+
+<img src="img/alipay-qr.png" alt="支付宝捐款" width="150" />
+
 ## 源代码
 
 [https://github.com/chenxsan/tv-recipe](https://github.com/chenxsan/tv-recipe)

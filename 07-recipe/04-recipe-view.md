@@ -159,9 +159,9 @@ Finished in 0.8 seconds
 1. _test/controllers/user_controller_test.exs_
 
   ```elixir
-  conn = get conn, page_path(conn, :index)
+      conn = get conn, page_path(conn, :index)
       assert html_response(conn, 200) =~ Map.get(@valid_attrs, :username)
-  +    assert html_response(conn, 200) =~ "菜谱"
+  +   assert html_response(conn, 200) =~ "菜谱"
     end
   ```
 2. _web/templates/layout/app.html.eex_
@@ -170,7 +170,7 @@ Finished in 0.8 seconds
               <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
               <%= if @current_user do %>
                 <li><%= link @current_user.username, to: user_path(@conn, :show, @current_user) %></li>
-  +              <li><%= link "菜谱", to: recipe_path(@conn, :index) %></li>
+  +             <li><%= link "菜谱", to: recipe_path(@conn, :index) %></li>
                 <li><%= link "退出", to: session_path(@conn, :delete, @current_user), method: "delete" %></li>
               <% else %>
                 <li><%= link "登录", to: session_path(@conn, :new) %></li>

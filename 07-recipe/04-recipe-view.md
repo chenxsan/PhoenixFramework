@@ -156,25 +156,32 @@ Finished in 0.8 seconds
 
 在结束本节之前，别忘了在菜单栏上加上“菜谱”，不然我们就只能通过修改 url 访问菜谱相关页面了：
 
-1. _test/controllers/user_controller_test.exs_
+```elixir
+diff --git a/test/controllers/user_controller_test.exs b/test/controllers/user_controller_test.exs
+index a1b75c6..7bd839c 100644
+--- a/test/controllers/user_controller_test.exs
++++ b/test/controllers/user_controller_test.exs
+@@ -29,6 +29,7 @@ defmodule TvRecipe.UserControllerTest do
+     # 注册后自动登录，检查首页是否包含用户名
+     conn = get conn, page_path(conn, :index)
+     assert html_response(conn, 200) =~ Map.get(@valid_attrs, :username)
++    assert html_response(conn, 200) =~ "菜谱"
+   end
 
-  ```elixir
-      conn = get conn, page_path(conn, :index)
-      assert html_response(conn, 200) =~ Map.get(@valid_attrs, :username)
-  +   assert html_response(conn, 200) =~ "菜谱"
-    end
-  ```
-2. _web/templates/layout/app.html.eex_
-
-  ```eex
-              <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-              <%= if @current_user do %>
-                <li><%= link @current_user.username, to: user_path(@conn, :show, @current_user) %></li>
-  +             <li><%= link "菜谱", to: recipe_path(@conn, :index) %></li>
-                <li><%= link "退出", to: session_path(@conn, :delete, @current_user), method: "delete" %></li>
-              <% else %>
-                <li><%= link "登录", to: session_path(@conn, :new) %></li>
-  ```
+   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
+diff --git a/web/templates/layout/app.html.eex b/web/templates/layout/app.html.eex
+index b13f370..49240c9 100644
+--- a/web/templates/layout/app.html.eex
++++ b/web/templates/layout/app.html.eex
+@@ -19,6 +19,7 @@
+             <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
+             <%= if @current_user do %>
+               <li><%= link @current_user.username, to: user_path(@conn, :show, @current_user) %></li>
++              <li><%= link "菜谱", to: recipe_path(@conn, :index) %></li>
+               <li><%= link "退出", to: session_path(@conn, :delete, @current_user), method: "delete" %></li>
+             <% else %>
+               <li><%= link "登录", to: session_path(@conn, :new) %></li>
+```
 
 运行测试：
 

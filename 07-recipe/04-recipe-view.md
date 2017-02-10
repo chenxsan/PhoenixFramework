@@ -153,3 +153,32 @@ Finished in 0.8 seconds
 我们知道，`index.html.eex` 页面上有一个 `New recipe` 的按钮，那我们的测试里是否需要体现？`Show`、`Edit`、`Delete` 这些按钮呢？要不要给它们写测试？
 
 测试测什么，测到怎么的粒度，我觉得没有标准答案，更多时候要根据项目情况去权衡。但如果一定要有一个什么做为参考，我会选择设计稿。设计稿上定下来的元素，我们就尽量在测试里体现 - 否则设计人员很容易找上门来，说怎么少了这少了那。
+
+在结束本节之前，别忘了在菜单栏上加上“菜谱”，不然我们就只能通过修改 url 访问菜谱相关页面了：
+
+_test/controllers/user_controller_test.exs_
+```elixir
+conn = get conn, page_path(conn, :index)
+     assert html_response(conn, 200) =~ Map.get(@valid_attrs, :username)
++    assert html_response(conn, 200) =~ "菜谱"
+   end
+```
+_web/templates/layout/app.html.eex_
+```eex
+             <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
+             <%= if @current_user do %>
+               <li><%= link @current_user.username, to: user_path(@conn, :show, @current_user) %></li>
++              <li><%= link "菜谱", to: recipe_path(@conn, :index) %></li>
+               <li><%= link "退出", to: session_path(@conn, :delete, @current_user), method: "delete" %></li>
+             <% else %>
+               <li><%= link "登录", to: session_path(@conn, :new) %></li>
+```
+运行测试：
+
+```bash
+$ mix test
+..........................................................
+
+Finished in 0.8 seconds
+58 tests, 0 failures
+```

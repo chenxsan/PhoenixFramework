@@ -1,4 +1,4 @@
-# Phoenix Framework 中文入门教程 - 我的 Phoenix 项目开发历程
+# Phoenix Framework 中文入门教程
 
 前端开发一直都是我的主业。是的，我是在暗示你：Phoenix Framework 非常容易上手。不过也因为我一直在从事前端开发，后端的一些概念我可能理解得不够到位，如有错误，欢迎指正 😁。
 

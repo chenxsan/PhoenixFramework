@@ -60,4 +60,4 @@ Compiling 13 files (.ex)
 Generated menu app                          
 The database for Menu.Repo has been created 
 ```
-成功创建开发数据库。
+成功创建开发环境数据库。

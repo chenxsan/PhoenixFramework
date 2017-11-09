@@ -1,15 +1,15 @@
 # 创建 Phoenix 项目
 
-恭喜你完成第一章的准备工作！
+恭喜你完成了第一章的准备工作！
 
-在[第一章](00-prepare.md)里我们提到过，Mix 是 Elixir 提供的构建工具。这一章里，我们就用它来创建一个 Phoenix 项目：
+在[第一章](00-prepare.md)里我们提到过，Mix 是 Elixir 提供的开发工具。这一章里，我们就用它来创建一个 Phoenix 项目：
 
 ```bash
-$ mix phx.new menu
+$ mix phx.new menu --database mysql
 ```
-这里，`mix phx.new` 表示创建一个 Phoenix 项目，`menu` 指示新项目的路径，即当前目录下的 `menu` 目录。如果目录已存在，命令会提示我们是否覆盖该目录，否则会新建 `menu` 目录。
+这里，`mix phx.new` 表示创建一个 Phoenix 项目，`menu` 指示新项目的路径，即当前目录下的 `menu` 目录。如果目录已存在，命令会提示我们是否覆盖该目录，否则会新建 `menu` 目录。`--database mysql` 则表示该项目的数据库类型是 MySQL，而不是默认的 PostgreSQL。
 
- `mix phx.new menu` 命令在执行过程中，会提示我们：
+`mix phx.new menu` 命令在执行过程中，会提示我们：
 
 ```bash
 Fetch and install dependencies? [Yn]
@@ -43,16 +43,14 @@ You can also run your app inside IEx (Interactive Elixir) as:
 ```elixir
 # Configure your database
 config :menu, Menu.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  adapter: Ecto.Adapters.MySQL,
+  username: "root",
+  password: "",
   database: "menu_dev",
   hostname: "localhost",
   pool_size: 10
 ```
-如果你的 PostgreSQL 数据库用户名/密码不是 `postgres/postgres` 组合，请调整 `dev.exs` 中相应内容。
-
-之后再执行 `mix ecto.create`：
+如果你的 MySQL 数据库用户名/密码不是 `root/` 组合，请调整之后再执行 `mix ecto.create`：
 
 ```sh
 ➜  menu  mix ecto.create                    

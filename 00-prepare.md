@@ -65,7 +65,7 @@ node --version
 
 Phoenix 默认使用 PostgreSQL 数据库，因此，也请[根据 PostgreSQL 文档](https://wiki.postgresql.org/wiki/Detailed_installation_guides)安装好它。
 
-如果你更熟悉 MySQL，或 MongoDB，Phoenix 也有提供接口。但我建议入手时使用 PostgreSQL，因为它是 Phoenix Framework 默认的数据库，出了问题，也能保证最快速度的修复。
+如果你更熟悉 MySQL，或 MongoDB，Phoenix 也有提供相应适配器。
 
 ## inotify-tools
 

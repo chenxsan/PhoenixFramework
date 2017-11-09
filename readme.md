@@ -4,9 +4,9 @@
 
 ## 目录
 
-1. [准备工作](00-prepare.md)
-2. [创建项目](01-create-project.md)
-3. [Phoenix 初体验](02-explore-phoenix.md)
+0. [准备工作](00-prepare.md)
+1. [创建项目](01-create-project.md)
+2. [Phoenix 初体验](02-explore-phoenix.md)
 
 ## 捐款
 
